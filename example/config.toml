@@ -1,0 +1,29 @@
+baseURL = 'https://example.com/'
+languageCode = 'en-us'
+title = 'My Webpage'
+theme = 'meow'
+
+[params]
+
+# These files will appear when you run generate_icons.sh with a image you want as logo as parameter
+#example : ./generate_icons.sh me.jpg
+logoAltText = "Logo"
+logo = "/logo.svg"
+favicon = "/favicon.png"
+faviconIco = "/favicon.ico"
+appletouch = "/apple-touch-icon.png"
+svgicon = "/logo.svg"
+icon512 = "/android-chrome-512x512.png"
+
+# this will show tags in the footer of posts
+taglist = true
+
+# this will show links for gitlab,github,rss
+showlinks = true
+
+[menu]
+  [[menu.main]]
+    identifier = "posts"
+    name = "Posts"
+    url = "/posts"
+    weight = 10
