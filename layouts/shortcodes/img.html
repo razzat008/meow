@@ -9,6 +9,8 @@
 <figure {{ with .Get "class" }}class="{{.}}"{{ end -}}>
 	{{- with .Get "link"}}<a href="{{.}}">{{ end -}}
 	<img src="{{ .Get "src" }}"
+      loading="lazy"
+      decoding="async"
 	     {{- with .Get "mouse" }} title="{{.}}"{{ end -}}
 	     {{- with .Get "alt" }} alt="{{.}}"{{ end -}}
 	     {{- with .Get "height" }} height="{{.}}"{{ end -}}
