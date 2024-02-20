@@ -3,7 +3,7 @@
 body {
   color: white;
 	background: #242629 ;
-  font-size: 125%;
+  font-size: 150%;
   line-height: 1.5;
   max-width: 800px;
   padding: 1rem;
@@ -20,9 +20,11 @@ body {
   display: flex;
 }
 
+/* for all remainning links */
 a {
+  /* color: chocolate; */
   color: #db5793;
-  text-decoration: none;
+  text-decoration: underline;
 }
 
 .site-nav a {
@@ -31,11 +33,22 @@ a {
   padding: 1rem;
 }
 
+/* webpage title along the navbar*/
 .site-nav .logo {
+  color: #db5793;
+  text-decoration: none;
   font-weight: bold;
   padding-left: 0;
 }
 
+
+/*links for menu items on the navbar*/
+.site-nav .main-menu a {
+  color: #db5793;
+  text-decoration: none ;
+}
+
+/*for menu items on the navbar*/
 .main-menu {
   display: flex;
   list-style: none;
