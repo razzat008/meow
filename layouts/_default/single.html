@@ -1,8 +1,10 @@
 {{ partial "header.html" . }}
 
 <h2>{{ .Title }}</h2>
-{{ .Date.Format "January 2, 2006" }}
+<i style="font-size: 90%;">{{ .Description }}</i>
 <br>
+<br>
+<b>{{ .Date.Format "January 2, 2006" }}</b>
 <br>
 
 {{ .Content }}
