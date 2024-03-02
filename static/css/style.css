@@ -2,7 +2,7 @@
 
 body {
   color: white;
-	background: #242629 ;
+  background: #242629;
   font-size: 150%;
   line-height: 1.5;
   max-width: 800px;
@@ -41,11 +41,10 @@ a {
   padding-left: 0;
 }
 
-
 /*links for menu items on the navbar*/
 .site-nav .main-menu a {
   color: #db5793;
-  text-decoration: none ;
+  text-decoration: none;
 }
 
 /*for menu items on the navbar*/
@@ -57,6 +56,7 @@ a {
 }
 
 @media screen and (max-width: 48rem) {
+
   .site-nav,
   .main-menu {
     flex-direction: column;
@@ -72,6 +72,11 @@ a {
 
 .post-snippet {
   margin-bottom: 1rem;
+}
+
+/*list style for posts list*/
+.post-snippet {
+  list-style: none;
 }
 
 .post-snippet h3 {
@@ -91,5 +96,3 @@ a {
 footer {
   text-align: center;
 }
-
-
