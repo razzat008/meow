@@ -1,4 +1,4 @@
-This is a hugo template I made for myself because I wanted something that is minimal and easy to configure.  
+This is a hugo template made to make a simple hugo webpage that is minimalistic and easily to configurable.  
 It has been made possible by using other templates for references so a huge thanks to them.
 Fork this and you can make changes to this as you like.
 
