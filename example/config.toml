@@ -17,6 +17,8 @@ icon512 = "/android-chrome-512x512.png"
 
 # this will show tags in the footer of posts
 taglist = true
+# for description of any page
+description = false
 
 # this will show links for gitlab,github,rss
 showlinks = true
@@ -27,3 +29,9 @@ showlinks = true
     name = "Posts"
     url = "/posts"
     weight = 10
+
+  [[menu.main]]
+    identifier = "links"
+    name = "Links"
+    url = "/links"
+    weight = 20
