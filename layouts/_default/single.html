@@ -1,12 +1,7 @@
 {{ partial "header.html" . }}
 
 <h2>{{ .Title }}</h2>
-<i style="font-size: 90%;">{{ .Description }}</i>
-<br>
-<br>
-<b>{{ .Date.Format "January 2, 2006" }}</b>
-<br>
+<div style="font-size: 85%">{{ .Description }}</div>
+<b>{{ .Date.Format "January 2, 2006" }}</b><br />
 
-{{ .Content }}
-
-{{ partial "footer.html" . }}
+{{ .Content }} {{ partial "footer.html" . }}
