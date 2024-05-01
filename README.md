@@ -3,7 +3,7 @@
 This is a [Hugo](gohugo.io) template made to make a simple hugo webpage that is
 both minimalistic and easy to configure.
 
-My [website](razzat008.github.io) is built using this theme.
+My [website](https://razzat008.github.io) is built using this theme.
 
 # How to use?
 
