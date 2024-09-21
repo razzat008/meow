@@ -2,6 +2,7 @@
 
 <h2>{{ .Title }}</h2>
 <div style="font-size: 85%">{{ .Description }}</div>
-<b>{{ .Date.Format "January 2, 2006" }}</b><br />
+Date created: <b>{{ .Date.Format "January 2, 2006" }}</b><br />
+Last modified: <b>{{ .Lastmod.Format "January 2, 2006" }}</b><br />
 
 {{ .Content }} {{ partial "footer.html" . }}
