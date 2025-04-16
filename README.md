@@ -5,6 +5,11 @@ both minimalistic and easy to configure.
 
 My [website](https://razzat008.github.io) is built using this theme.
 
+## Needs improvements
+- [ ] make use of base templates provided by hugo itself
+- [ ] better css/responsive
+- [ ] better blogs section
+
 # How to use?
 
 Just like any other Hugo theme, you can clone it to your machine and use it
