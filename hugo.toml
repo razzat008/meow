@@ -1,0 +1,36 @@
+baseURL = 'https://example.org/'
+languageCode = 'en-US'
+title = 'My Example Website'
+enableGitInfo = true
+
+[menus]
+  [[menus.main]]
+    name = 'Posts'
+    pageRef = '/posts'
+    weight = 10
+
+  [[menus.main]]
+    name = 'Links'
+    pageRef = '/links'
+    weight = 20
+
+  [[menus.main]]
+    name = 'Stuffs'
+    pageRef = '/stuffs'
+    weight = 30
+
+  [[menus.main]]
+    name = 'Tags'
+    pageRef = '/tags'
+    weight = 40
+
+[frontmatter]
+  date = ['date', 'publishdate', 'pubdate', 'published', 'lastmod', 'modified']
+  expiryDate = ['expirydate', 'unpublishdate']
+  lastmod = [':git', 'lastmod', 'modified', 'date', 'publishdate', 'pubdate', 'published']
+  publishDate = ['publishdate', 'pubdate', 'published', 'date']
+
+[module]
+  [module.hugoVersion]
+    extended = false
+    min = '0.146.0'
