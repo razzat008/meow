@@ -5,6 +5,7 @@
   {{ $dateHuman := .Date | time.Format ":date_long" }}
   {{ $lastMod := .Lastmod | time.Format ":date_medium" }}
   <time datetime="{{ $dateMachine }}">{{ $dateHuman }}</time><br>
+  
   <small>last_modified: <time datetime="{{ $lastMod }}">{{ $dateHuman }}</time></small>
 
   {{ .Content }}
