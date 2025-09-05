@@ -75,8 +75,9 @@ header .logo a:hover {
 }
 
 /* Main content */
-main {
-  margin-top: 80px; /* push below fixed navbar */
+
+main.container{
+  margin-top: 80px;
 }
 
 /* Links in main content and footer */
@@ -100,4 +101,13 @@ footer {
   padding: 20px;
   font-size: 0.9rem;
   color: #666;
+}
+
+.logo-img {
+  width: 40px;   /* or use em/rem/% */
+  height: auto;  /* keeps aspect ratio */
+}
+
+svg {
+  vertical-align: text-bottom;
 }

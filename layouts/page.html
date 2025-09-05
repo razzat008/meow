@@ -1,12 +1,14 @@
 {{ define "main" }}
-  <h1>{{ .Title }}</h1>
 
   {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
   {{ $dateHuman := .Date | time.Format ":date_long" }}
   {{ $lastMod := .Lastmod | time.Format ":date_medium" }}
+  <h1>{{ .Title }}</h1>
   <time datetime="{{ $dateMachine }}">{{ $dateHuman }}</time><br>
   
-  <small>last_modified: <time datetime="{{ $lastMod }}">{{ $dateHuman }}</time></small>
+  <small>last_modified: <time datetime="{{ .Lastmod }}">{{ $lastMod }}</time></small>
+
+  <div style="font-size: 85%; font-style:italic;">{{ .Description }}</div>
 
   {{ .Content }}
   {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
