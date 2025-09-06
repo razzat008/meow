@@ -111,3 +111,8 @@ footer {
 svg {
   vertical-align: text-bottom;
 }
+
+pre {
+  white-space: pre-wrap; /* allow wrapping */
+  word-wrap: break-word; /* break long tokens if needed */
+}
