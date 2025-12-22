@@ -3,6 +3,6 @@
   {{ range where site.RegularPages "Section" "posts" }}
     <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
     <!-- {{ .Summary }} -->
-    {{ .Plain | htmlUnescape | strings.Truncate 150}}
+    {{ .Content | strings.Truncate 150}}
   {{ end }}
 {{ end }}
