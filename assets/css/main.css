@@ -117,3 +117,7 @@ pre {
   white-space: pre-wrap; /* allow wrapping */
   word-wrap: break-word; /* break long tokens if needed */
 }
+
+.highlight {
+  line-height: 1.1;
+}
