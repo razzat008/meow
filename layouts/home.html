@@ -1,8 +1,16 @@
 {{ define "main" }}
   {{ .Content }}
-  {{ range where site.RegularPages "Section" "posts" }}
-    <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
-    <!-- {{ .Summary }} -->
-    {{ .Content | strings.Truncate 150}}
+  
+  {{/* 'site.Pages' includes sections/branch pages; 'where' filters by section */}}
+  {{ range where site.Pages "Section" "posts" }}
+    
+    {{/* Exclude the main /posts/_index.md itself to avoid an infinite loop or redundant title */}}
+    {{ if ne .RelPermalink "/posts/" }}
+      <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
+      
+      {{/* Using .Summary is often cleaner than manual truncation */}}
+      <p>{{ .Summary | plainify | truncate 150 }}</p>
+    {{ end }}
+    
   {{ end }}
 {{ end }}
