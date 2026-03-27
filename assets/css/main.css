@@ -189,20 +189,20 @@ footer a:hover {
 /* For syntax highlighting */
 .highlight pre,
 pre code {
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  overflow-x: auto;
-  display: block;
-  padding: 1rem;
+  white-space: pre;          /* keep original whitespace, no wrapping */
+  word-wrap: normal;         /* don't break words */
+  overflow-x: auto;          /* horizontal scroll on small screens */
+  display: block; /* stretches full length */
+  padding: 0.5rem;
   line-height: 1.1;
   max-width: 100%;
 }
-
 .highlight {
   display: block;
   box-sizing: border-box;
   width: 100%;
   margin: 1.5rem 0;
+  overflow: hidden;          /* contain the scrollable child */
 }
 
 /* For image handling */
