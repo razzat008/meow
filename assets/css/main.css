@@ -216,3 +216,16 @@ figcaption {
   text-align: left;
   /* margin-top: 0.5rem; */
 }
+
+/* Grid view(not really a grid tho) for images in block */
+.img-row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;  /* wraps on mobile */
+}
+
+.img-row figure,
+.img-row img {
+  flex: 1;
+  min-width: 0;     /* prevents overflow */
+}
