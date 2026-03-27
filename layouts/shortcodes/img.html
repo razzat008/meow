@@ -1,0 +1,111 @@
+{{ $src := $.Page.Resources.GetMatch (.Get "src") }}
+{{ if not $src }}
+  {{ $src = resources.GetMatch (.Get "src") }}
+{{ end }}
+{{ $caption := .Get "caption" }}
+
+{{ if in (.Get "src") "http" }}
+  {{ if $caption }}<figure>{{ end }}
+    <img
+      src="{{ .Get "src" }}"
+      {{ with .Get "alt" }}alt="{{.}}"{{ else }}alt=""{{ end }}
+      {{ with .Get "width" }}width="{{.}}"{{ end }}
+      {{ with .Get "height" }}height="{{.}}"{{ end }}
+      style="max-width:100%;height:auto;{{ with .Get "style" }}{{.}}{{ end }}"
+      loading="lazy"
+      decoding="async"
+    >
+  {{ if $caption }}<figcaption>{{ $caption }}</figcaption></figure>{{ end }}
+
+{{ else if $src }}
+  {{ $displayWidth  := default (string $src.Width)  (.Get "width")  }}
+  {{ $displayHeight := default (string $src.Height) (.Get "height") }}
+
+  {{ if in (.Get "src") ".gif" }}
+    {{ if $caption }}<figure>{{ end }}
+      <img
+        src="{{ $src.RelPermalink }}"
+        width="{{ $displayWidth }}"
+        height="{{ $displayHeight }}"
+        {{ with .Get "alt" }}alt="{{.}}"{{ else }}alt=""{{ end }}
+        style="max-width:100%;height:auto;{{ with .Get "style" }}{{.}}{{ end }}"
+        loading="lazy"
+        decoding="async"
+      >
+    {{ if $caption }}<figcaption>{{ $caption }}</figcaption></figure>{{ end }}
+
+  {{ else }}
+    {{ $tinyw   := default "500x"  (.Get "tinyw")   }}
+    {{ $smallw  := default "800x"  (.Get "smallw")  }}
+    {{ $mediumw := default "1200x" (.Get "mediumw") }}
+
+    {{ $tiny   := $src.Resize $tinyw }}
+    {{ $small  := $src }}
+    {{ $medium := $src }}
+    {{ if ge $src.Width 800  }}{{ $small  = $src.Resize $smallw  }}{{ end }}
+    {{ if ge $src.Width 1200 }}{{ $medium = $src.Resize $mediumw }}{{ end }}
+
+    {{ $tinyWebp   := $src.Resize (printf "%s webp" $tinyw) }}
+    {{ $smallWebp  := $src }}
+    {{ $mediumWebp := $src }}
+    {{ if ge $src.Width 800  }}{{ $smallWebp  = $src.Resize (printf "%s webp" $smallw)  }}{{ end }}
+    {{ if ge $src.Width 1200 }}{{ $mediumWebp = $src.Resize (printf "%s webp" $mediumw) }}{{ end }}
+
+    {{ $defaultSrc := $src.RelPermalink }}
+    {{ if ge $src.Width 1200 }}{{ $defaultSrc = $medium.RelPermalink }}{{ end }}
+
+    {{ $sizesAttr := "(min-width: 35em) 720px, 100vw" }}
+    {{ with .Get "sizes" }}{{ $sizesAttr = . }}{{ end }}
+    {{ with .Get "width" }}{{ $sizesAttr = printf "%spx" . }}{{ end }}
+
+    {{ if $caption }}<figure>{{ end }}
+      <picture>
+        <source type="image/webp"
+          srcset="
+            {{ $tinyWebp.RelPermalink }} 500w
+            {{ if ge $src.Width 800  }}, {{ $smallWebp.RelPermalink  }} 800w{{ end }}
+            {{ if ge $src.Width 1200 }}, {{ $mediumWebp.RelPermalink }} 1200w{{ end }}
+          "
+          sizes="{{ $sizesAttr }}"
+        >
+        <img
+          src="{{ $defaultSrc }}"
+          srcset="
+            {{ $tiny.RelPermalink }} 500w
+            {{ if ge $src.Width 800  }}, {{ $small.RelPermalink  }} 800w{{ end }}
+            {{ if ge $src.Width 1200 }}, {{ $medium.RelPermalink }} 1200w{{ end }}
+          "
+          sizes="{{ $sizesAttr }}"
+          width="{{ $displayWidth }}"
+          height="{{ $displayHeight }}"
+          {{ with .Get "alt" }}alt="{{.}}"{{ else }}alt=""{{ end }}
+          style="max-width:100%;height:auto;{{ with .Get "style" }}{{.}}{{ end }}"
+          loading="lazy"
+          decoding="async"
+        >
+      </picture>
+    {{ if $caption }}<figcaption>{{ $caption }}</figcaption></figure>{{ end }}
+  {{ end }}
+
+{{ else }}
+  {{ errorf "img shortcode: could not find image '%s'" (.Get "src") }}
+{{ end }}
+
+
+{{/* basic */}}
+{{/* < img src="test.jpg" alt="A photo" > */}}
+
+{{/* limit display width */}}
+{{/* < img src="test.jpg" alt="A photo" width="400px" > */}}
+
+{{/* custom sizes hint for browser */}}
+{{/* < img src="test.jpg" alt="A photo" sizes="(min-width: 60em) 800px, 100vw" > */}}
+
+{{/* custom resize breakpoints */}}
+{{/* < img src="test.jpg" alt="A photo" tinyw="300x" smallw="600x" mediumw="900x" > */}}
+
+{{/* inline style overrides e.g. float */}}
+{{/* < img src="test.jpg" alt="A photo" style="float:right; margin-left:1rem;" > */}}
+
+{{/* external image */}}
+{{/* < img src="https://example.com/photo.jpg" alt="External" > */}}
