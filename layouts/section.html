@@ -1,0 +1,19 @@
+{{ define "main" }}
+  <h1>{{ .Title }}</h1>
+  {{ .Content }}
+
+  {{/* Group pages by year */}}
+  {{ range .Pages.GroupByDate "2006" }}
+    <section class="year-group">
+      <h2>{{ .Key }}</h2> {{/* This displays the year, e.g., 2026 */}}
+      <ul>
+        {{ range .Pages }}
+          <li>
+            {{ .Date | time.Format "Jan 02" }}: 
+            <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+          </li>
+        {{ end }}
+      </ul>
+    </section>
+  {{ end }}
+{{ end }}

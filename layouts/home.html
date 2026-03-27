@@ -1,0 +1,96 @@
+{{ define "main" }}
+<div class="content-grid">
+
+  {{ .Content }} 
+    
+  {{/* --- SECTION: RECENT POSTS --- */}}
+  <section class="posts-section">
+    <h2>Recent Uploads</h2>
+      {{/* 'first 5' keeps the homepage tidy */}}
+      <ul class="posts-grid">
+      {{ range first 5 (where site.RegularPages "Section" "posts") }}
+        {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
+        {{ $dateHuman := .Date | time.Format ":date_long" }}
+        <li class="post-item">
+          <time datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
+          <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+        </li>
+      {{ end }}
+    </ul>
+  </section>
+
+  {{/* --- SECTION: LINKS --- */}}
+  <section class="links-section">
+    <a href="/links"><h2>Recommended Links</h2></a>
+    {{ with .Site.GetPage "/links" }}
+      {{ if .Params.links_list }}
+        <ul class="links-grid">
+          {{ range .Params.links_list }}
+            <li class="link-item">
+              <a href="{{ .link | relURL }}">{{ .title }}</a>
+            </li>
+          {{ end }}
+        </ul>
+      {{ end }}
+    {{ end }}
+  </section>
+
+  {{/* --- SECTION: BOOKS --- */}}
+  <section class="book-section">
+    <a href="/books"><h2>Reading List</h2></a>
+    {{ with .Site.GetPage "/books" }}
+      {{ if .Params.book_list }}
+        {{ $reading := slice }}
+        {{ $others := slice }}
+        
+        {{/* Categorize in a single pass */}}
+        {{ range .Params.book_list }}
+          {{ if eq .status "reading" }}
+            {{ $reading = $reading | append . }}
+          {{ else }}
+            {{ $others = $others | append . }}
+          {{ end }}
+        {{ end }}
+
+        <ul class="book-grid">
+          {{/* Render the reading list */}}
+          {{ range first 4 $reading }}
+            <li class="book-item status-{{ .status }}">
+              <strong>{{ .title }}</strong>
+              <span class="author">by {{ .author }}</span>
+              <span class="badge">Currently Reading</span>
+            </li>
+          {{ end }}
+
+          {{/* Render the others */}}
+          {{ range first 4 $others }}
+            <li class="book-item status-{{ .status }}">
+              <strong>{{ .title }}</strong>
+              <span class="author">by {{ .author }}</span>
+            </li>
+          {{ end }}
+        </ul>
+      {{ end }}
+    {{ end }}
+  </section>
+
+  {{/* --- SECTION: WATCH LIST --- */}}
+  <section class="watch-section">
+    <a href="/watches"><h2>Watch List</h2></a>
+    {{ with .Site.GetPage "/watches" }}
+      <div class="watch-grid">
+        {{ range first 8 .Params.watch_list }}
+          {{ $typeClass := printf "type-%s" (.type | lower) }}
+          <div class="watch-card {{ $typeClass }}">
+            <div class="watch-info">
+              <span class="media-type">{{ .type }}</span>
+              <strong class="media-title">{{ .title }}</strong>
+            </div>
+          </div>
+        {{ end }}
+      </div>
+    {{ end }}
+  </section>
+
+</div>
+{{ end }}
