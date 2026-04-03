@@ -5,7 +5,7 @@
     
   {{/* --- SECTION: RECENT POSTS --- */}}
   <section class="posts-section">
-    <h2>Recent Uploads</h2>
+    <a href="/posts"><h2>Recent Uploads</h2></a>
       {{/* 'first 5' keeps the homepage tidy */}}
       <ul class="posts-grid">
       {{ range first 5 (where site.RegularPages "Section" "posts") }}
