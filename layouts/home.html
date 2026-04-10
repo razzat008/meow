@@ -79,7 +79,7 @@
     <a href="/watches"><h2>Watch List</h2></a>
     {{ with .Site.GetPage "/watches" }}
       <div class="watch-grid">
-        {{ range first 8 .Params.watch_list }}
+        {{ range .Params.watch_list }}
           {{ $typeClass := printf "type-%s" (.type | lower) }}
           <div class="watch-card {{ $typeClass }}">
             <div class="watch-info">
@@ -91,6 +91,48 @@
       </div>
     {{ end }}
   </section>
-
 </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const grid = document.querySelector(".book-grid");
+    if (!grid) return;
+    const cards = Array.from(grid.children);
+
+    // 1. Shuffle algorithm (Fisher-Yates)
+    for (let i = cards.length - 1; i >= 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [cards[i], cards[j]] = [cards[j], cards[i]];
+    }
+
+    const selectedCards = cards.slice(0, 8);
+
+    grid.innerHTML = "";
+    selectedCards.forEach((card) => grid.appendChild(card));
+
+    grid.style.display = "grid";
+  });
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const grid = document.querySelector(".watch-grid");
+    if (!grid) return;
+    const cards = Array.from(grid.children);
+
+    // 1. Shuffle algorithm (Fisher-Yates)
+    for (let i = cards.length - 1; i >= 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [cards[i], cards[j]] = [cards[j], cards[i]];
+    }
+
+    const selectedCards = cards.slice(0, 8);
+
+    grid.innerHTML = "";
+    selectedCards.forEach((card) => grid.appendChild(card));
+
+    grid.style.display = "grid";
+  });
+</script>
+
 {{ end }}
