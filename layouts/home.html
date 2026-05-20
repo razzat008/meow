@@ -54,7 +54,7 @@
 
         <ul class="book-grid">
           {{/* Render the reading list */}}
-          {{ range first 4 $reading }}
+          {{ range $reading }}
             <li class="book-item status-{{ .status }}">
               <strong>{{ .title }}</strong>
               <span class="author">by {{ .author }}</span>
@@ -63,7 +63,7 @@
           {{ end }}
 
           {{/* Render the others */}}
-          {{ range first 4 $others }}
+          {{ range $others }}
             <li class="book-item status-{{ .status }}">
               <strong>{{ .title }}</strong>
               <span class="author">by {{ .author }}</span>
@@ -94,44 +94,22 @@
 </div>
 
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const grid = document.querySelector(".book-grid");
+  function shuffleGrid(selector, limit) {
+    const grid = document.querySelector(selector);
     if (!grid) return;
     const cards = Array.from(grid.children);
-
-    // 1. Shuffle algorithm (Fisher-Yates)
     for (let i = cards.length - 1; i >= 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [cards[i], cards[j]] = [cards[j], cards[i]];
     }
-
-    const selectedCards = cards.slice(0, 8);
-
     grid.innerHTML = "";
-    selectedCards.forEach((card) => grid.appendChild(card));
-
+    cards.slice(0, limit).forEach(card => grid.appendChild(card));
     grid.style.display = "grid";
-  });
-</script>
+  }
 
-<script>
   document.addEventListener("DOMContentLoaded", function () {
-    const grid = document.querySelector(".watch-grid");
-    if (!grid) return;
-    const cards = Array.from(grid.children);
-
-    // 1. Shuffle algorithm (Fisher-Yates)
-    for (let i = cards.length - 1; i >= 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [cards[i], cards[j]] = [cards[j], cards[i]];
-    }
-
-    const selectedCards = cards.slice(0, 8);
-
-    grid.innerHTML = "";
-    selectedCards.forEach((card) => grid.appendChild(card));
-
-    grid.style.display = "grid";
+    shuffleGrid(".book-grid", 6);
+    shuffleGrid(".watch-grid", 8);
   });
 </script>
 
