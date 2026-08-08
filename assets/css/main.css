@@ -1,7 +1,7 @@
 /* * { */
-/*   border: 3px solid black; */
-/*   padding: 3px; */
-/*   gap: 3px; */
+  /* border: 3px solid black; */
+  /* padding: 3px; */
+  /* gap: 3px; */
 /* } */
 
 body {
@@ -85,7 +85,7 @@ footer a:hover {
 
 main a:visited,
  footer:visited{
-  color: blue;
+  color: purple;
 }
 
 /* Standard layout for text */
@@ -244,4 +244,30 @@ figcaption {
 .img-row img {
   flex: 1;
   min-width: 0;     /* prevents overflow */
+}
+
+contact-form {
+  border-top: 1px solid #383a4c;
+  padding-top: 1rem;
+}
+ 
+.contact-form #name-input-field {
+  border: 1px dark;
+  padding: 0.5rem;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  width: 100%;
+  max-width: 300px;
+  background-color: white;
+  color: var(--text);
+}
+ 
+.contact-form #message-input-field {
+  border: 1px dark;
+  padding: 0.5rem;
+  font-size: 1rem;
+  width: 100%;
+  max-width: 500px;
+  background-color: white;
+  color: var(--text);
 }
