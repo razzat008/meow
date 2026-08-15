@@ -271,3 +271,54 @@ contact-form {
   background-color: white;
   color: var(--text);
 }
+
+.sidebar-toc details {
+  padding: 0.75rem 0 0;
+}
+
+.sidebar-toc summary {
+  cursor: pointer;
+  user-select: none;
+  font-style: italic;
+}
+.sidebar-toc details[open] summary {
+  font-style:normal;
+}
+
+/* Override the global nav > ul rule */
+.sidebar-toc nav > ul {
+  display: block;
+  list-style: none;
+  margin: 0.75rem 0 0;
+  padding: 0;
+}
+
+.sidebar-toc ul {
+  list-style: none;
+  margin: 0;
+  padding-left: 1rem;
+}
+
+/* Nested headings */
+.sidebar-toc ul ul {
+  border-left: 1px dotted #999;
+  margin: 0.25rem 0;
+}
+
+/* Each heading gets its own line */
+.sidebar-toc li {
+  display: block;
+  margin: 0.15rem 0;
+}
+
+/* Links */
+.sidebar-toc a {
+  color: #1e3e62;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.sidebar-toc a:hover {
+  color: black;
+  text-decoration: underline solid;
+}
