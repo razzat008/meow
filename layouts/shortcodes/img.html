@@ -3,9 +3,12 @@
   {{ $src = resources.GetMatch (.Get "src") }}
 {{ end }}
 {{ $caption := .Get "caption" }}
+{{ $id := .Get "id" }}
 {{ $mouse   := .Get "mouse" }}
+
 {{ if in (.Get "src") "http" }}
-  {{ if $caption }}<figure>{{ end }}
+  <!-- Path 1: Remote URLs -->
+  {{ if or $caption $id }}<figure{{ with $id }} id="{{ . }}"{{ end }}>{{ end }}
     <img
       src="{{ .Get "src" }}"
       {{ with .Get "alt" }}alt="{{.}}"{{ else }}alt=""{{ end }}
@@ -16,12 +19,18 @@
       loading="lazy"
       decoding="async"
     >
-  {{ if $caption }}<figcaption>{{ $caption }}</figcaption></figure>{{ end }}
+  {{ if or $caption $id }}
+    {{ with $caption }}<figcaption>{{ . }}</figcaption>{{ end }}
+  </figure>
+  {{ end }}
+
 {{ else if $src }}
   {{ $displayWidth  := default (string $src.Width)  (.Get "width")  }}
   {{ $displayHeight := default (string $src.Height) (.Get "height") }}
+  
   {{ if in (.Get "src") ".gif" }}
-    {{ if $caption }}<figure>{{ end }}
+    <!-- Path 2: Local GIFs -->
+    {{ if or $caption $id }}<figure{{ with $id }} id="{{ . }}"{{ end }}>{{ end }}
       <img
         src="{{ $src.RelPermalink }}"
         width="{{ $displayWidth }}"
@@ -32,8 +41,13 @@
         loading="lazy"
         decoding="async"
       >
-    {{ if $caption }}<figcaption>{{ $caption }}</figcaption></figure>{{ end }}
+    {{ if or $caption $id }}
+      {{ with $caption }}<figcaption>{{ . }}</figcaption>{{ end }}
+    </figure>
+    {{ end }}
+
   {{ else }}
+    <!-- Path 3: Processed Local Images (Responsive WebP & Fallbacks) -->
     {{ $tinyw   := default "500x"  (.Get "tinyw")   }}
     {{ $smallw  := default "800x"  (.Get "smallw")  }}
     {{ $mediumw := default "1200x" (.Get "mediumw") }}
@@ -52,7 +66,8 @@
     {{ $sizesAttr := "(min-width: 35em) 720px, 100vw" }}
     {{ with .Get "width" }}{{ $sizesAttr = printf "%spx" . }}{{ end }}
     {{ with .Get "sizes" }}{{ $sizesAttr = . }}{{ end }}
-    {{ if $caption }}<figure>{{ end }}
+    
+    {{ if or $caption $id }}<figure{{ with $id }} id="{{ . }}"{{ end }}>{{ end }}
       <picture>
         <source type="image/webp"
           srcset="
@@ -79,7 +94,10 @@
           decoding="async"
         >
       </picture>
-    {{ if $caption }}<figcaption>{{ $caption }}</figcaption></figure>{{ end }}
+    {{ if or $caption $id }}
+      {{ with $caption }}<figcaption>{{ . }}</figcaption>{{ end }}
+    </figure>
+    {{ end }}
   {{ end }}
 {{ else }}
   {{ errorf "img shortcode: could not find image '%s'" (.Get "src") }}
